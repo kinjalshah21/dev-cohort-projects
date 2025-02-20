@@ -11,6 +11,7 @@ yarn-error.log
 
 # TailwindCSS
 /.tailwind
+output.css
 
 # .env files (if you have any environment variables)
 .env

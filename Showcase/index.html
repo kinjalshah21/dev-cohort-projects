@@ -5,12 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./src/output.css" rel="stylesheet">
+    <script src="./src/index.js"></script>
 </head>
 
-<body>
-    <h1 class="text-xl font-bold underline">
-        Hello world!
-    </h1>
-</body>
+<body class="h-screen w-screen flex items-center justify-center overflow-hidden">
+    <div class="main h-full w-full flex items-center justify-center gap-4 p-6 bg-white shadow-lg rounded-lg">
+        <!-- Button to navigate to previous slide -->
+        <button class="p-3 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-500 hover:text-gray-300 transition duration-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+        </button>
 
+        <!-- Section for BMI Calculator -->
+        <div class="w-3/4 h-4/5 bg-gray-900 flex items-center justify-center rounded-lg">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+                <h2 class="text-2xl font-bold mb-4">BMI Calculator</h2>
+            
+                <!--Select the Gender -->
+                <div class="flex justify-center gap-4 mb-3">
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="gender" value="male" class="form-radio" checked>
+                        <span>Male</span>
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="gender" value="female" class="form-radio">
+                        <span>Female</span>
+                    </label>
+                </div>
+            
+                <!-- Weight Input -->
+                <label class="block text-gray-700 font-medium">Weight (kg)</label>
+                <input type="number" id="weight" class="w-full p-2 border rounded mb-3 focus:ring focus:ring-blue-200"
+                    placeholder="Enter weight" min="0" oninput="validateInput(this)">
+            
+                <!-- Height Input -->
+                <label class="block text-gray-700 font-medium">Height (m)</label>
+                <input type="number" step="0.01" id="height" class="w-full p-2 border rounded mb-3 focus:ring focus:ring-blue-200"
+                    placeholder="Enter height" min="0" oninput="validateInput(this)">
+            
+                <!-- Error Message -->
+                <p id="error-message" class="text-red-500 text-sm mt-1 hidden"></p>
+                
+                <button onclick="calculateBMI()"
+                    class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300">
+                    Calculate BMI
+                </button>
+            
+                <!-- Show Result -->
+                <p id="result" class="mt-4 text-lg font-semibold"></p>
+            </div>
+        </div>
+        <!-- Section for Number Calculator -->
+        <!-- Section for Review Collector -->
+
+        <!-- Button to navigate to next slide -->
+        <button class="p-3 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-500 hover:text-gray-300 transition duration-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+
+    </div>
+</body>
 </html>
