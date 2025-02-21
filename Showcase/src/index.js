@@ -1,3 +1,5 @@
+let display = document.getElementById("display");
+
 function calculateBMI() {
   let weight = document.getElementById("weight").value;
   let height = document.getElementById("height").value;
@@ -56,4 +58,28 @@ function calculateBMI() {
 
   result.innerText = `BMI: ${bmi} (${category})`;
   result.classList.add(colorClass);
+}
+
+//learning :: variables value can be null until the html cannot load the element so insert script tag at the end of html body
+
+function clearDisplay(){
+    display.innerText = '0';
+}
+
+function deleteLast(){
+    display.innerText = display.innerText.slice(0,-1) || '0';
+} 
+
+function appendToDisplay(val) {
+  console.log(`val ${val}`);
+  console.log(`display.innerText ${display.innerText}`);
+    if(display.innerText === '0' && val !== '.'){
+      display.innerText = val;
+    }else {
+      display.innerText += val;
+    }
+}
+
+function calculateResult(){
+  //to-do: figure out how to do this.
 }
