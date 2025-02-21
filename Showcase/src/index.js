@@ -17,12 +17,12 @@ function calculateBMI() {
     errorMessage.classList.add("hidden");
   }
 
-  let bmi = (weight * 10000 / (height * height)).toFixed(2);
+  let bmi = ((weight * 10000) / (height * height)).toFixed(2);
   let category = "";
   let colorClass = "";
 
   //BMI category based on gender
-  console.log(`bmi ${bmi}`);
+  // console.log(`bmi ${bmi}`);
   if (gender === "male") {
     if (bmi < 18.5) {
       category = "Underweight";
@@ -62,24 +62,32 @@ function calculateBMI() {
 
 //learning :: variables value can be null until the html cannot load the element so insert script tag at the end of html body
 
-function clearDisplay(){
-    display.innerText = '0';
+function clearDisplay() {
+  display.innerText = "0";
 }
 
-function deleteLast(){
-    display.innerText = display.innerText.slice(0,-1) || '0';
-} 
+function deleteLast() {
+  display.innerText = display.innerText.slice(0, -1) || "0";
+}
 
 function appendToDisplay(val) {
-  console.log(`val ${val}`);
-  console.log(`display.innerText ${display.innerText}`);
-    if(display.innerText === '0' && val !== '.'){
-      display.innerText = val;
-    }else {
-      display.innerText += val;
-    }
+  // console.log(`val ${val}`);
+  // console.log(`display.innerText ${display.innerText}`);
+  //validation that user is entering valid number.
+  if (display.innerText.includes(".") && val== '.') return;
+  
+  if (display.innerText === "0" && val !== ".") {
+    display.innerText = val;
+  } else {
+    display.innerText += val;
+  }
 }
 
-function calculateResult(){
+function calculateResult() {
   //to-do: figure out how to do this.
+  // console.log("display.innerText in calculate Result", display.innerText);
+  if (display.innerText !== "0") {
+    let exp = display.innerText.replace("%", "/");
+    display.innerText = eval(exp);
+  }
 }
