@@ -6,6 +6,10 @@ const nextBtn = document.getElementById("next-btn");
 const prevBtn = document.getElementById("prev-btn");
 let currentIndex = 0;
 const projects = [reviewCollector, bmiCalc, normalCalc]; //to-do: replace 3rd item with review controller
+let reviews = [];
+let currentPage = 1;
+const reviewsPerPage = 3;
+let givenRating = 0;
 
 nextBtn.addEventListener("click", () => {
   if (currentIndex < projects.length - 1) {
@@ -157,6 +161,67 @@ function calculateResult() {
     let exp = display.innerText.replace("%", "/");
     display.innerText = eval(exp);
   }
+}
+
+//update selected star colors
+function updateStars(rating) {
+  document.querySelectorAll(".star").forEach((star, index) => {
+    star.classList.toggle("text-yellow-400", index < rating);
+    star.classList.toggle("text-gray-300", index >= rating);
+  });
+}
+
+//handle star ratings
+document.querySelectorAll(".star").forEach((star) => {
+  star.addEventListener("click", function () {
+    givenRating = this.getAttribute("data-value");
+    updateStars(givenRating);
+  });
+
+  //hover effect
+  star.addEventListener("mouseover", function () {
+    updateStars(this.getAttribute("data-value"));
+  });
+
+  //when no rating is selected
+  star.addEventListener("mouseout", function () {
+    updateStars(givenRating);
+  });
+});
+
+//handle form submission
+document.getElementById("review-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  let name = document.getElementById("name").value.trim();
+  let review = document.getElementById("review").value.trim();
+
+  if (!name || !review || givenRating == 0) {
+    alert("Please fill all fields and select a rating!");
+    return;
+  }
+
+  reviews.push({ name, review, rating: givenRating });
+  console.log("reviews", reviews);
+  //reset form
+  document.getElementById("review-form").reset();
+  givenRating = 0;
+  updateStars(0);
+  showReviews();
+});
+
+//showReviews
+function showReviews() {
+  let container = document.getElementById("review-container");
+  container.innerHTML = "";
+
+  // to-do : figure out pagination logic
+  reviews.forEach((item) => {
+    let div = document.createElement("div");
+    div.classList = "p-4 bg-white shadow rounded-lg border border-gray-200";
+    div.innerHTML = `<strong>${item.name}</strong> - <strong class = "text-yellow-400">${"★".repeat(item.rating)}</strong> 
+                     <p class="text-gray-600">${item.review}</p>`;
+    container.appendChild(div);
+  });
 }
 
 //default display
