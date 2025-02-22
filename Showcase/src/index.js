@@ -22,7 +22,6 @@ function calculateBMI() {
   let colorClass = "";
 
   //BMI category based on gender
-  // console.log(`bmi ${bmi}`);
   if (gender === "male") {
     if (bmi < 18.5) {
       category = "Underweight";
@@ -71,21 +70,16 @@ function deleteLast() {
 }
 
 function appendToDisplay(val) {
-  // console.log(`val ${val}`);
-  // console.log(`display.innerText ${display.innerText}`);
-  //validation that user is entering valid number.
-  if (display.innerText.includes(".") && val== '.') return;
-  
-  if (display.innerText === "0" && val !== ".") {
-    display.innerText = val;
-  } else {
-    display.innerText += val;
-  }
+  //decimal number validation
+  let currentText = display.innerText;
+  let lastNumber = currentText.split(/[\+\-\*\/]/).pop();
+
+  if (val === "." && lastNumber.includes(".")) return;
+
+  display.innerText = (currentText === "0" || currentText === "00")  && val !== "." ? val : currentText + val;
 }
 
 function calculateResult() {
-  //to-do: figure out how to do this.
-  // console.log("display.innerText in calculate Result", display.innerText);
   if (display.innerText !== "0") {
     let exp = display.innerText.replace("%", "/");
     display.innerText = eval(exp);
