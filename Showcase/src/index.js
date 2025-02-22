@@ -1,4 +1,58 @@
-let display = document.getElementById("display");
+const display = document.getElementById("display");
+const normalCalc = document.getElementById("normal-calc-div");
+const bmiCalc = document.getElementById("bmi-calc-div");
+//to-do: get review collector when ready
+const nextBtn = document.getElementById("next-btn");
+const prevBtn = document.getElementById("prev-btn");
+let currentIndex = 0;
+const projects = [bmiCalc, normalCalc, normalCalc]; //to-do: replace 3rd item with review controller
+
+nextBtn.addEventListener("click", () => {
+  console.log("currentIndex in next ", currentIndex);
+  if (currentIndex < projects.length - 1) {
+    currentIndex++;
+    console.log("currentIndex in next after if ", currentIndex);
+  }
+  displayProject(currentIndex);
+  toggleNextButton(nextBtn);
+  togglePrevButton(prevBtn);
+});
+
+prevBtn.addEventListener("click", () => {
+  console.log("currentIndex in prev ", currentIndex);
+  if (currentIndex > 0) {
+    currentIndex--;
+    console.log("currentIndex in prev after if ", currentIndex);
+  }
+  displayProject(currentIndex);
+  toggleNextButton(nextBtn);
+  togglePrevButton(prevBtn);
+});
+
+function toggleNextButton(button) {
+  if(currentIndex == projects.length - 1){
+    button.disabled = true;
+    button.classList.remove("hover:bg-gray-500", "hover:text-gray-300","transition");
+  }else{
+    button.disabled = false;
+    button.classList.add("hover:bg-gray-500", "hover:text-gray-300","transition");
+  }
+}
+function togglePrevButton(button) {
+  if(currentIndex == 0){
+    button.disabled = true;
+    button.classList.remove("hover:bg-gray-500", "hover:text-gray-300","transition");
+  }else{
+    button.disabled = false;
+     button.classList.add("hover:bg-gray-500", "hover:text-gray-300","transition");
+  }
+}
+
+function displayProject(currentIndex){
+  //hide every project first
+  projects.forEach(project => project.classList.add("hidden"));
+  projects[currentIndex].classList.remove("hidden");
+}
 
 function calculateBMI() {
   let weight = document.getElementById("weight").value;
@@ -52,9 +106,6 @@ function calculateBMI() {
     }
   }
 
-  console.log(`category ${category}`);
-  console.log(`colorClass ${colorClass}`);
-
   result.innerText = `BMI: ${bmi} (${category})`;
   result.classList.add(colorClass);
 }
@@ -76,7 +127,10 @@ function appendToDisplay(val) {
 
   if (val === "." && lastNumber.includes(".")) return;
 
-  display.innerText = (currentText === "0" || currentText === "00")  && val !== "." ? val : currentText + val;
+  display.innerText =
+    (currentText === "0" || currentText === "00") && val !== "."
+      ? val
+      : currentText + val;
 }
 
 function calculateResult() {
@@ -85,3 +139,6 @@ function calculateResult() {
     display.innerText = eval(exp);
   }
 }
+
+//default display
+displayProject(currentIndex);
