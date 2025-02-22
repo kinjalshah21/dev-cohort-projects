@@ -8,7 +8,7 @@
 </head>
 
 <body class="h-screen w-screen flex items-center justify-center overflow-hidden">
-    <div class="main h-full w-full flex items-center justify-center gap-4 p-6 bg-slate-100 rounded-lg">
+    <div class="main h-screen w-screen flex items-center justify-center gap-4 p-6 bg-gray-900">
         <!-- Button to navigate to previous slide -->
         <button id="prev-btn"
             class="p-3 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-500 hover:text-gray-300 transition duration-400">
@@ -18,8 +18,8 @@
             </svg>
         </button>
 
-        <div class="w-3/4 h-4/5 bg-slate-400 flex items-center justify-center rounded-lg shadow-lg">
-                <!-- Section for BMI Calculator -->
+        <div class="w-4xl h-10/12 bg-blue-200 flex items-center justify-center rounded-lg shadow-lg">
+            <!-- Section for BMI Calculator -->
             <div id="bmi-calc-div" class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
                 <h2 class="text-2xl font-bold mb-4">BMI Calculator</h2>
 
@@ -57,7 +57,7 @@
                 <!-- Show Result -->
                 <p id="result" class="mt-4 text-lg font-semibold"></p>
             </div>
-        <!-- Section for Number Calculator -->
+            <!-- Section for Number Calculator -->
             <div id="normal-calc-div" class="bg-gray-900 text-white p-6 rounded-lg shadow-lg w-72 ">
                 <h2 class="text-2xl font-bold mb-4 text-center">Calculator</h2>
 
@@ -70,39 +70,100 @@
                 <!-- Buttons -->
                 <div class="grid grid-cols-4 gap-2">
                     <!-- Row 1 -->
-                    <button class="active:scale-95 transition rounded-sm p-2 bg-red-500" onclick="clearDisplay()">C</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2 bg-gray-700" onclick="deleteLast()">⌫</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2 bg-gray-700" onclick="appendToDisplay('%')">%</button>
-                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500" onclick="appendToDisplay('/')">÷</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-red-500"
+                        onclick="clearDisplay()">C</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2 bg-gray-700"
+                        onclick="deleteLast()">⌫</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2 bg-gray-700"
+                        onclick="appendToDisplay('%')">%</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('/')">÷</button>
 
                     <!-- Row 2 -->
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('7')">7</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('8')">8</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('9')">9</button>
-                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500" onclick="appendToDisplay('*')">×</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('7')">7</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('8')">8</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('9')">9</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('*')">×</button>
 
                     <!-- Row 3 -->
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('4')">4</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('5')">5</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('6')">6</button>
-                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500" onclick="appendToDisplay('-')">−</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('4')">4</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('5')">5</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('6')">6</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('-')">−</button>
 
                     <!-- Row 4 -->
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('1')">1</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('2')">2</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('3')">3</button>
-                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500" onclick="appendToDisplay('+')">+</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('1')">1</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('2')">2</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('3')">3</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('+')">+</button>
 
                     <!-- Row 5 -->
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('00')">00</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('0')">0</button>
-                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2" onclick="appendToDisplay('.')">.</button>
-                    <button class="active:scale-95 transition rounded-sm p-2 bg-green-500" onclick="calculateResult()">=</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('00')">00</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('0')">0</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('.')">.</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-green-500"
+                        onclick="calculateResult()">=</button>
+                </div>
+            </div>
+            <!-- Section for Review Collector -->
+            <div id="review-collector" class="w-full h-full bg-blue-200 flex rounded-lg shadow-lg">
+                <!-- Left Div -->
+                <div class="bg-white w-1/2 p-7 flex flex-col justify-start items-center rounded-l-lg">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-700">Submit Reviews</h2>
+                    <form id="review-form" class="w-full space-y-4">
+                        <input type="text" id="name"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition"
+                            placeholder="Enter Name" required>
+                        <textarea id="review"
+                            class="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition h-28"
+                            placeholder="Write review here" required></textarea>
+                        <!-- Star Ratings will be added later -->
+                        <div class="flex space-x-2 mb-4">
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="1">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="2">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="3">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="4">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="5">★</span>
+                        </div>
+                        <button type="Submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit
+                            Review</button>
+                    </form>
+                </div>
+                <!-- Right Div -->
+                <div class="w-1/2 p-6 bg-gray-100 rounded-r-lg flex flex-col">
+                    <h2 class="text-2xl font-bold mb-4">User Reviews</h2>
+                    <div class="review-container h-9/12 overflow-y-auto bg-amber-400"></div>
+                    <!-- pagination -->
+                    <div class="mt-auto flex justify-center space-x-2">
+
+                        <button id="prev-review-btn"
+                            class="px-4 py-2 bg-gray-200 rounded-lg disabled:opacity-50 shadow-md hover:bg-gray-300 transition"
+                            onclick="prevPage()">Previous</button>
+
+                        <span id="pageNumber" class="text-lg p-2">1</span>
+
+                        <button id="next-review-btn"
+                            class="px-4 py-2 bg-gray-200 rounded-lg disabled:opacity-50 shadow-md hover:bg-gray-300 transition"
+                            onclick="nextPage()">Next</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Section for Review Collector -->
-
         <!-- Button to navigate to next slide -->
         <button id="next-btn"
             class="p-3 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-500 hover:text-gray-300 transition duration-400">
