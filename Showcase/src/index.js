@@ -5,7 +5,7 @@ const reviewCollector = document.getElementById("review-collector");
 const nextBtn = document.getElementById("next-btn");
 const prevBtn = document.getElementById("prev-btn");
 let currentIndex = 0;
-const projects = [reviewCollector, bmiCalc, normalCalc]; //to-do: replace 3rd item with review controller
+const projects = [bmiCalc, normalCalc, reviewCollector];
 let reviews = [];
 let currentPage = 1;
 const reviewsPerPage = 3;
@@ -71,10 +71,16 @@ function displayProject(currentIndex) {
 }
 
 function prevPage() {
-  console.log("Add functionality");
+  if(currentPage > 1){
+    currentPage--;
+    showReviews();
+  }
 }
 function nextPage() {
-  console.log("Add functionality");
+  if(currentPage * reviewsPerPage < reviews.length){
+    currentPage++;
+    showReviews();
+  }
 }
 
 function calculateBMI() {
@@ -134,7 +140,6 @@ function calculateBMI() {
 }
 
 //learning :: variables value can be null until the html cannot load the element so insert script tag at the end of html body
-
 function clearDisplay() {
   display.innerText = "0";
 }
@@ -201,7 +206,6 @@ document.getElementById("review-form").addEventListener("submit", (event) => {
   }
 
   reviews.push({ name, review, rating: givenRating });
-  console.log("reviews", reviews);
   //reset form
   document.getElementById("review-form").reset();
   givenRating = 0;
@@ -212,16 +216,32 @@ document.getElementById("review-form").addEventListener("submit", (event) => {
 //showReviews
 function showReviews() {
   let container = document.getElementById("review-container");
+  let prevPageButton = document.getElementById("prev-review-btn");
+  let nextPageButton = document.getElementById("next-review-btn");
   container.innerHTML = "";
+  let start = (currentPage - 1) * reviewsPerPage;
+  let end = start + reviewsPerPage;
+  let perPageReviews = reviews.slice(start, end);
 
-  // to-do : figure out pagination logic
-  reviews.forEach((item) => {
+  perPageReviews.forEach((item) => {
     let div = document.createElement("div");
-    div.classList = "p-4 bg-white shadow rounded-lg border border-gray-200";
+    div.classList = "p-4 bg-white shadow rounded-lg border border-gray-200 w-full mb-1";
     div.innerHTML = `<strong>${item.name}</strong> - <strong class = "text-yellow-400">${"★".repeat(item.rating)}</strong> 
                      <p class="text-gray-600">${item.review}</p>`;
     container.appendChild(div);
   });
+
+
+  prevPageButton.disabled = currentPage === 1;
+  nextPageButton.disabled = end >= reviews.length;
+  document.getElementById("page-number").innerHTML = currentPage;
+
+  toggleHoverEffect(prevPageButton);
+  toggleHoverEffect(nextPageButton);
+}
+
+function toggleHoverEffect(button){
+  button.classList.toggle("hover:bg-gray-300", !button.disabled)
 }
 
 //default display
