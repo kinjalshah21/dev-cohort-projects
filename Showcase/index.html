@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./src/output.css" rel="stylesheet">
+</head>
+
+<body class="h-screen w-screen flex items-center justify-center overflow-hidden">
+    <div class="main h-screen w-screen flex items-center justify-center gap-4 p-6 bg-slate-800">
+        <!-- Button to navigate to previous slide -->
+        <button id="prev-btn"
+            class="p-3 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-500 hover:text-gray-300 transition duration-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+
+        <div class="w-4xl h-10/12 bg-gray-200 flex items-center justify-center rounded-lg shadow-lg">
+            <!-- Section for BMI Calculator -->
+            <div id="bmi-calc-div" class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+                <h2 class="text-2xl font-bold mb-4">BMI Calculator</h2>
+
+                <!--Select the Gender -->
+                <div class="flex justify-center gap-4 mb-3">
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="gender" value="male" class="form-radio" checked>
+                        <span>Male</span>
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="gender" value="female" class="form-radio">
+                        <span>Female</span>
+                    </label>
+                </div>
+
+                <!-- Weight Input -->
+                <label class="block text-gray-700 font-medium">Weight (kg)</label>
+                <input type="number" id="weight" class="w-full p-2 border rounded mb-3 focus:ring focus:ring-blue-200"
+                    placeholder="Enter weight" min="0">
+
+                <!-- Height Input -->
+                <label class="block text-gray-700 font-medium">Height (cm)</label>
+                <input type="number" step="0.01" id="height"
+                    class="w-full p-2 border rounded mb-3 focus:ring focus:ring-blue-200" placeholder="Enter height"
+                    min="0">
+
+                <!-- Error Message -->
+                <p id="error-message" class="text-red-500 text-sm mt-1"></p>
+
+                <button onclick="calculateBMI()"
+                    class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300">
+                    Calculate BMI
+                </button>
+
+                <!-- Show Result -->
+                <p id="result" class="mt-4 text-lg font-semibold"></p>
+            </div>
+            <!-- Section for Number Calculator -->
+            <div id="normal-calc-div" class="bg-gray-900 text-white p-6 rounded-lg shadow-lg w-72 ">
+                <h2 class="text-2xl font-bold mb-4 text-center">Calculator</h2>
+
+                <!-- Display -->
+                <div
+                    class="bg-gray-800 text-right p-4 rounded text-2xl font-mono mb-4 h-16 flex items-center justify-end">
+                    <span id="display" class="block w-full  truncate">0</span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="grid grid-cols-4 gap-2">
+                    <!-- Row 1 -->
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-red-500"
+                        onclick="clearDisplay()">C</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2 bg-gray-700"
+                        onclick="deleteLast()">⌫</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2 bg-gray-700"
+                        onclick="appendToDisplay('%')">%</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('/')">÷</button>
+
+                    <!-- Row 2 -->
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('7')">7</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('8')">8</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('9')">9</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('*')">×</button>
+
+                    <!-- Row 3 -->
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('4')">4</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('5')">5</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('6')">6</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('-')">−</button>
+
+                    <!-- Row 4 -->
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('1')">1</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('2')">2</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('3')">3</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-yellow-500"
+                        onclick="appendToDisplay('+')">+</button>
+
+                    <!-- Row 5 -->
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('00')">00</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('0')">0</button>
+                    <button class="hover:bg-gray-500 active:scale-95 transition rounded-sm p-2"
+                        onclick="appendToDisplay('.')">.</button>
+                    <button class="active:scale-95 transition rounded-sm p-2 bg-green-500"
+                        onclick="calculateResult()">=</button>
+                </div>
+            </div>
+            <!-- Section for Review Collector -->
+            <div id="review-collector" class="w-full h-full bg-blue-200 flex rounded-lg shadow-lg">
+                <!-- Left Div -->
+                <div class="bg-gray-200 shadow-lg w-1/2 p-7 flex flex-col justify-start items-start rounded-l-lg">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-700">Submit Reviews</h2>
+                    <form id="review-form" class="w-full space-y-4">
+                        <input type="text" id="name"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition"
+                            placeholder="Enter Name" required>
+                        <textarea id="review"
+                            class="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition h-28"
+                            placeholder="Write review here" required></textarea>
+                        <!-- Star Ratings will be added later -->
+                        <div class="flex space-x-2 mb-4">
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="1">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="2">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="3">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="4">★</span>
+                            <span class="star cursor-pointer text-gray-300 text-2xl" data-value="5">★</span>
+                        </div>
+                        <button type="Submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit
+                            Review</button>
+                    </form>
+                </div>
+                <!-- Right Div -->
+                <div class="w-1/2 p-6 bg-gray-200 rounded-r-lg flex flex-col items-start shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-700 ">User Reviews</h2>
+                    <div id="review-container" class="h-9/12 w-full overflow-y-auto"></div>
+                    <!-- pagination -->
+                    <div class="mt-auto flex justify-center space-x-2">
+
+                        <button id="prev-review-btn"
+                            class="px-4 py-2 bg-gray-200 rounded-lg disabled:opacity-50 shadow-md hover:bg-gray-300 transition"
+                            onclick="prevPage()">Previous</button>
+
+                        <span id="page-number" class="text-lg p-2">1</span>
+
+                        <button id="next-review-btn"
+                            class="px-4 py-2 bg-gray-200 rounded-lg disabled:opacity-50 shadow-md hover:bg-gray-300 transition"
+                            onclick="nextPage()">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Button to navigate to next slide -->
+        <button id="next-btn"
+            class="p-3 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-500 hover:text-gray-300 transition duration-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+
+    </div>
+    <script src="./src/index.js"></script>
+</body>
+
+</html>
